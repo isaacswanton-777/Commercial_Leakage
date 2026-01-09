@@ -1,0 +1,8 @@
+FROM ollama/ollama:latest
+
+# Trust the Corporate Network
+# We copy the same certificate you used for the app
+COPY corporate_root.crt /usr/local/share/ca-certificates/corporate_root.crt
+
+# Update the trusted certificate store inside the AI container
+RUN update-ca-certificates

@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # SERVICE 1: The AI Brain (Ollama)
+  ollama_service:
+    # CRITICAL: Use the image we built manually with the certificates
+    image: guardian_brain
+    # FORCE LOCAL: Do not try to check the internet for updates
+    pull_policy: never
+    container_name: guardian_brain
+    volumes:
+      - ollama_data:/root/.ollama:Z
+    ports:
+      - "11434:11434"
+    entrypoint: /bin/sh
+    # Increased sleep to 10s to ensure brain is ready
+    command: -c "ollama serve & sleep 10 && ollama pull llama3.2 && wait"
+    networks:
+      - guardian_net
+
+  # SERVICE 2: The Application (FastAPI + React)
+  guardian_app:
+    # CRITICAL: Use the image we built manually
+    image: guardian_logic
+    # FORCE LOCAL: Do not try to check the internet for updates
+    pull_policy: never
+    container_name: guardian_logic
+    depends_on:
+      - ollama_service
+    ports:
+      - "8000:8000"
+    environment:
+      - OLLAMA_BASE_URL=http://ollama_service:11434
+    volumes:
+      # Mount current directory so you can edit code live
+      - .:/app:Z
+    command: uvicorn api:app --host 0.0.0.0 --port 8000 --reload
+    networks:
+      - guardian_net
+
+volumes:
+  ollama_data:
+
+networks:
+  guardian_net:
+    driver: bridge

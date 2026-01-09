@@ -1,0 +1,5 @@
+﻿"invoice_id,vendor,date,line_items,total_amount,notes"
+"INV-1001,Bean Co,2024-11-20,""500kg of GEN-001"",5000.00,""Standard monthly order."""
+"INV-1002,Bean Co,2024-11-21,""100kg of GEN-001"",2000.00,""Urgent restock. Charged as Premium?"""
+"INV-1003,Bean Co,2024-11-22,""Shipping Fees"",250.00,""Rush delivery for INV-1002. No ROA number provided."""
+"INV-1004,Bean Co,2024-11-23,""1200kg of GEN-001"",12000.00,""Bulk order. No discount applied."""

@@ -1,0 +1,60 @@
+Commercial Guardian AI
+
+Automated Commercial Assurance & Invoice Auditing Agent
+
+This is a local, containerized AI agent designed to prevent commercial leakage by auditing invoices against contract terms.
+
+Key Features
+
+Privacy First: Runs 100% locally using Ollama and Llama 3.2 (3B). No financial data leaves your infrastructure.
+
+RAG Architecture: Ingests PDF/Markdown contracts into a Vector Database to ground decisions in legal reality.
+
+Real-Time Auditing: Checks individual invoices for rate discrepancies, missing approvals, and missed volume discounts.
+
+Forensic Analysis: Aggregates months of data to identify "Price Creep" and systematic billing errors.
+
+Project Structure
+
+.
+├── data/
+│   ├── contracts/       # Place .md or parsed .pdf contracts here
+│   └── transactions/    # Invoices .csv files
+├── docker-compose.yml   # Orchestration for AI and Python App
+├── guardian_demo.py     # Real-time auditing logic
+├── guardian_bulk.py     # Historical forensic logic
+├── requirements.txt     # Python dependencies
+└── demo.sh              # One-click runner
+
+
+Quick Start (Demo)
+
+Prerequisites: Docker Desktop installed.
+
+Start the Demo:
+
+Mac/Linux: ./demo.sh
+
+Windows: .\demo.ps1
+
+Choose Mode:
+
+Mode 1 (Real-Time): Processes invoices.csv. Watch it catch a $20 vs $10 rate error and a missed 10% volume discount.
+
+Mode 2 (Forensic): Generates 6 months of fake data. Watch it detect a price increase from $10.00 to $10.50 starting in Month 3.
+
+Architecture
+
+Model: Llama 3.2 (3B) running on Ollama.
+
+Orchestration: Docker Compose.
+
+Framework: LangChain & Pandas.
+
+Vector DB: ChromaDB (Local).
+
+Customization
+
+New Contracts: Add any .md file to data/contracts/ and restart the demo. The agent will automatically learn the new terms.
+
+New Data: Replace invoices.csv with your own export from SAP/Oracle.

@@ -1,0 +1,17 @@
+langchain
+langchain-community
+langchain-core
+langchain-ollama
+langchain-chroma
+langchain-text-splitters
+langgraph
+chromadb
+pandas
+pydantic
+apscheduler
+click
+python-dotenv
+tiktoken
+fastapi
+uvicorn
+websockets
